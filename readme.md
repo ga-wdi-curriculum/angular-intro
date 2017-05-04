@@ -1,11 +1,11 @@
 ## Angular Intro, Controllers, and Directives
 
-- Describe the benefits of using a front end framework
+- Describe the benefits of using a front-end framework
 - Differentiate between directives, modules, and controllers in Angular
-- Render and bind controller data in the view.
+- Render and bind controller data in the view
 - Explain what an Angular directive is and how we use them
-- Use `ng-repeat` to iterate over data.
-- Use `ng-hide`/`ng-show` to hide and show elements.
+- Use `ng-repeat` to iterate over data
+- Use `ng-hide`/`ng-show` to hide and show elements
 - Use `ng-model` to bind user input to model data
 - Use `ng-click` to respond to user events
 
@@ -14,24 +14,22 @@
 Today we are transitioning into a new unit, as we begin to focus on building out bigger and bigger applications. As our applications grows in size and complexity, it can become increasingly difficult to manage all of our data, rendering logic, and view code from a code maintainability perspective without some sort of structure or guidelines. Luckily, the field of web development is evolving to rapidly produce solutions to this problem, and today we will look at one particular solution - Angular.js
 
 <details>
-<summary>**Q**: What is a Front End Framework?</summary>
+<summary><strong>Q</strong>: What is a front-end Framework?</summary>
 
-- a library that attempts to move some or all application logic to the browser, while providing a simple interface for keeping the front-end in sync with the back-end
+- a library that attempts to move some or all application logic to the browser, while providing an interface for keeping the front end in sync with the back end
 - applications can run completely in the browser, minimizing server load since the server is only accessed when the front end needs to synchronize data with the backend
-- server sends over the app in the initial request (HTML/CSS/JS) then JS makes all subsequent requests with AJAX
+- the server sends over the entire app in the initial request (HTML/CSS/JS) then JS makes all subsequent requests with AJAX
 - provides more fluid user experience
-- loads everything from the database on page load (data and templates) then renders/updates the page content based on user interaction.
-
 </details>
 
 <details>
-<summary>**Q**: What is Angular?</summary>
+<summary><strong>Q</strong>: What is Angular?</summary>
 
 - its a structural front end framework for dynamic web apps
 - uses `HTML` as your template language and lets you extend `HTML`'s syntax to express your application's functionality
-- allows you to utilize `HTML` attributes to add behavior through JS. (directives)
+- allows you to utilize `HTML` attributes to add behavior through JS (directives)
 - utilizes two-way data binding so that changes are reflected in various areas and persisted immediately without page refresh
-- Angular is different and blurs a lot of the lines of traditional front-end dev
+- Angular is different and blurs a lot of the lines of traditional front-end development
   - there'll be a lot of logic in the `DOM`
 </details>
 
@@ -144,7 +142,7 @@ For the rest of this morning, you will be working on building Grumblr, a one-mod
 To start:
 - Create a directory called `grumblr`
 - Inside that directory, create two files - a `html` file, and a `js` file
-- Add some boilerplate `html` and make sure to link to your `js` file and the **Angular CDN**
+- Add some boilerplate `html` and make sure to link to your `js` file and the **[Angular CDN](https://docs.angularjs.org/misc/downloading)**
 - Create and store to a variable, an array of hard-coded data that contains at least 5 objects with the following properties:
   - `title`
   - `author`
@@ -165,9 +163,11 @@ Let's add a new controller definition to `app.js`:
 // app.js
 angular
   .module("todoApp", [])
-  .controller("todosCtrl", [ todoController ])
+  .controller("TodosController", [
+    TodosControllerFunction
+  ])
 
-function todoController () {
+function TodosControllerFunction () {
   this.todos = todoData
 }
 ```
@@ -186,23 +186,23 @@ We can invoke our controller by using another Angular directive, `ng-controller`
 In `index.html`, let's add this directive to our `body` element:
 
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
 
 </body>
 ```
 
-> We used the [`ng-controller` directive](https://docs.angularjs.org/api/ng/directive/ngController) here in order to instantiate our controller in the DOM. In the same way that `ng-app` established the domain of the js functionality in the html element, the `ng-controller` establishes the domain in this div.
+> We used the [`ng-controller` directive](https://docs.angularjs.org/api/ng/directive/ngController) here in order to instantiate our controller in the DOM. In the same way that `ng-app` established the domain of the angular module's functionality in the html element, the `ng-controller` establishes the domain of the controller's functionality in this body element. We could, however, attach it on a child element (such as a div).
 
 > `vm` is an instance of our controller. `ng-controller` gives the whole div access to all the values and methods defined in that controller. This instance of a controller is called a "ViewModel".
 
-The `todosCtrl as vm` syntax is important here. In essence, we are creating a new instance of our controller that we defined earlier, and are saving it to a variable we are calling `vm`. This is significant because now, any property that we defined in our controller, is available in the view as a property on our instance.
+The `TodosController as vm` syntax is important here. In essence, we are creating a new instance of our controller that we defined earlier, and are saving it to a variable we are calling `vm`. This is significant because now, any property that we defined in our controller, is available in the view as a property on our instance.
 
 Therefore, we now have all the pieces necessary to print a todo to the page...
 
 Let's add some code inside the `body` to display a single todo:
 
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
   <p>First todo: {{vm.todos[0]}}</p>
 </body>
 ```
@@ -218,7 +218,7 @@ This is a great opportunity to take advantage of Angular's `ng-repeat` directive
 In `index.html`:
 
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
   <h2>Todos</h2>
   <div ng-repeat="todo in vm.todos">
     <p>{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
@@ -243,7 +243,7 @@ Now, when we refresh in the browser we see each of our todos with their respecti
 
 ## User Input and Data Binding
 
-Up until this point we have focused on displaying data, or the R of CRUD for a todo. Let's continue to dive deeper into Angular, by looking at how to respond to user events and capture user input, two fundamentals for front-end web development.
+Up until this point we have focused on displaying data, or the R of CRUD for a todo. Let's dive deeper into Angular, by looking at how to respond to user events and capture user input, two fundamentals for front-end web development.
 
 Let's continue building out our app's functionality, by adding the ability to add a new todo.
 
@@ -254,7 +254,7 @@ For now, a simple input and button will do...
 In `index.html`:
 
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
   <h2>Todos</h2>
   <div ng-repeat="todo in vm.todos | filter: {completed: false}">
     <p>{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
@@ -294,7 +294,7 @@ To start off and make sure that everything is wired up correctly, let's just log
 In `app.js`:
 
 ```js
-function todoController () {
+function TodosControllerFunction () {
   this.todos = todoData
   this.addTodo = function() {
     console.log("clicked!")
@@ -341,7 +341,7 @@ this.addTodo = function(){
 };
 ```
 
-Here we have access to the todo the user entered via a property on a controller of the same name that we used in the view (`this.newTodo`), we use that data to create a new todo, then add it to our collection.
+Here we have access to the todo the user entered via a property on a controller of the same name that we used in the view (`this.newTodo` in the controller is the same as `vm.newTodo` in the view). We use that data to create a new todo, then add it to our collection, and Angular automatically updates our view to display the new todo.
 
 ## You Do: Add a New Grumble
 
@@ -363,7 +363,7 @@ In order to display only the todos that have a `completed` value of `true`, we c
 Let's add it to our view in `index.html`:
 
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
   <h2>Todos</h2>
   <div ng-repeat="todo in vm.todos">
     <p ng-show="todo.completed">{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
@@ -383,7 +383,7 @@ Let's look at another way of only showing the todos that have not yet been compl
 
 In `index.html`:
 ```html
-<body ng-controller='todosCtrl as vm'>
+<body ng-controller='TodosController as vm'>
   <h2>Todos</h2>
   <div ng-repeat="todo in vm.todos | filter: {completed: false}">
     <p>{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
