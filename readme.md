@@ -328,7 +328,7 @@ In `index.html`:
 
 Now, when we refresh in the browser, we can see the data we enter into the input displayed in realtime.
 
-Furthermore, in this example we bound the user's input to a property we are calling `newTodo` on our the `vm`. Why this is important is that because of Angular's two-way data binding, any property attached to the VM in the view, is also available as a property inside the controller. This means that we are now all set up and ready to complete our `addTodo` method in the controller.
+Furthermore, in this example we bound the user's input to a property we are calling `newTodo` on the `vm`. Why this is important is that because of Angular's two-way data binding, any property attached to the VM in the view, is also available as a property inside the controller. This means that we are now all set up and ready to complete our `addTodo` method in the controller.
 
 Moving back to our `addTodo` method in the controller, we need to grab the user input, and create a new todo from that data.
 
@@ -358,22 +358,34 @@ Let's take a look at an example, by adding a new feature to our app. So far our 
 
 ### [`ng-show`](https://docs.angularjs.org/api/ng/directive/ngShow)
 
-In order to display only the todos that have a `completed` value of `true`, we can take advantage of the Angular directive `ng-show`:
+If we wanted to display only the todos that have a `completed` value of `true`, we can take advantage of the Angular directive `ng-show`:
 
 Let's add it to our view in `index.html`:
 
 ```html
 <body ng-controller='TodosController as vm'>
   <h2>Todos</h2>
-  <div ng-repeat="todo in vm.todos">
-    <p ng-show="todo.completed">{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
+  <div ng-repeat="todo in vm.todos" ng-show="todo.completed">
+    <p>{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
   </div>
 </body>
 ```
 
 > `ng-show` takes any truthy or falsey value as an argument, and if it evaluates to true - the element will be displayed, otherwise the element is set as display:none.
 
-> **Note**: To offer a semantic opposite, there is also the equivalent directive [ng-hide](https://docs.angularjs.org/api/ng/directive/ngHide) which hides an element if the passed in value is true.
+### [`ng-hide`](https://docs.angularjs.org/api/ng/directive/ngHide)
+
+In our case, we only want to see todos which have a value of `false` for their `completed` property.
+To do this, we should use `ng-hide`, which is the inverse of `ng-show`:
+
+```html
+<body ng-controller='TodosController as vm'>
+  <h2>Todos</h2>
+  <div ng-repeat="todo in vm.todos" ng-hide="todo.completed">
+    <p>{{$index + 1}}. {{todo.name}} - {{todo.completed}}</p>
+  </div>
+</body>
+```
 
 ### [Filters](https://docs.angularjs.org/api/ng/filter/filter)
 
