@@ -230,7 +230,7 @@ In `index.html`:
 
 Now, when we refresh in the browser we see each of our todos with their respective data and markup displaying.
 
-## `ng-repeat` - You Do - Grumblr (10 mins)
+## `ng-repeat` - You Do - Grumblr (15 mins)
 
 - Define a new controller attached to your app's module
 - Attach a property to your controller called `grumbles` which is equal to all of your hard-coded data
