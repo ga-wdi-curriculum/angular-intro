@@ -16,7 +16,7 @@ Today we are transitioning into a new unit, as we begin to focus on building out
 <details>
 <summary><strong>Q</strong>: What is a front-end Framework?</summary>
 
-- a library that attempts to move some or all application logic to the browser, while providing an interface for keeping the front end in sync with the back end
+- one that attempts to move some or all application logic to the browser, while providing an interface for keeping the front end in sync with the back end
 - applications can run completely in the browser, minimizing server load since the server is only accessed when the front end needs to synchronize data with the backend
 - the server sends over the entire app in the initial request (HTML/CSS/JS) then JS makes all subsequent requests with AJAX
 - provides more fluid user experience
@@ -28,7 +28,7 @@ Today we are transitioning into a new unit, as we begin to focus on building out
 - its a structural front end framework for dynamic web apps
 - uses `HTML` as your template language and lets you extend `HTML`'s syntax to express your application's functionality
 - allows you to utilize `HTML` attributes to add behavior through JS (directives)
-- utilizes two-way data binding so that changes are reflected in various areas and persisted immediately without page refresh
+- utilizes two-way data binding so that changes are reflected in various areas and persisted immediately without a page refresh
 - Angular is different and blurs a lot of the lines of traditional front-end development
   - there'll be a lot of logic in the `DOM`
 </details>
@@ -121,9 +121,9 @@ Let's add our very first directive. In the `index.html`:
 <html lang='en' ng-app='todoApp'>
 ```
 
-> `ng-app` designates the entry point of our application and is usually place near the root element of the page (i.e. the `<html>` or `<body>` tags). The argument to `ngApp` should correspond with the **name** of your app module. In this case, we're adding it to the `<html>`. The domain of the directive begins and ends with the opening and closing tags of the html element on which the directive is defined.
+> `ng-app` designates the entry point of our application and is usually placed near the root element of the page (i.e. the `<html>` or `<body>` tags). The argument to `ngApp` should correspond with the **name** of your app module. In this case, we're adding it to the `<html>`. The domain of the directive begins and ends with the opening and closing tags of the html element on which the directive is defined.
 
-In essence, linking `ng-app` with our module tell Angular that this `html` file is now an Angular app, and anything inside those tags can use Angular's features / syntax.
+In essence, linking `ng-app` with our module tells Angular that this `html` file is now an Angular app, and anything inside those tags can use Angular's features / syntax.
 
 ## [Angular Expressions](https://docs.angularjs.org/guide/expression)
 
@@ -135,7 +135,7 @@ In Angular, any Javascript that we want to execute and print to the screen can b
 
 For example, adding `{{5 + 5}} ` to the `body` of our `index.html` file, would print `10` to the screen.
 
-## You Do: Setup Grumblr Application (5 mins)
+## You Do: Setup Grumblr Application (10 mins)
 
 For the rest of this morning, you will be working on building Grumblr, a one-model application that will allow users to post their `grumbles`.
 
